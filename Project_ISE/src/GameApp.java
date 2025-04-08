@@ -27,7 +27,8 @@ public class GameApp {
                 System.out.println("2. Open Inventory");
                 System.out.println("3. Open Shop");
                 System.out.println("4. Character Customization");
-                System.out.println("5. Exit");
+                System.out.println("5. View Monsterdex");
+                System.out.println("6. Exit");
                 System.out.print("Enter your choice: ");
 
                 String choice = scanner.nextLine().trim();
@@ -48,6 +49,9 @@ public class GameApp {
                         CustomizationManager.openCharacterCustomization(user, conn, scanner);
                         break;
                     case "5":
+                        user.getInventory().getMonsterdex().displayMonsterdex();
+                        break;
+                    case "6":
                         running = false;
                         System.out.println("👋 Goodbye!");
                         break;

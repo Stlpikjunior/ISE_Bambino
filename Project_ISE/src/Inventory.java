@@ -3,11 +3,13 @@ import java.util.List;
 
 public class Inventory {
     private int coins;
-    private final List<String> items; // You can replace String with a real Item class later
+    private final List<Item> items;
+    private final Monsterdex monsterdex;
 
     public Inventory() {
         this.coins = 0;
         this.items = new ArrayList<>();
+        this.monsterdex = new Monsterdex();
     }
 
     // Coin methods
@@ -15,15 +17,29 @@ public class Inventory {
     public void addCoins(int amount) { this.coins += amount; }
     public void spendCoins(int amount) { this.coins -= amount; }
 
-    // Item methods (placeholder)
-    public List<String> getItems() { return items; }
-    public void addItem(String item) { items.add(item); }
+    public Monsterdex getMonsterdex() {
+        return monsterdex;
+    }
 
-    // Optional: show inventory summary
+    // Item methods
+    public List<Item> getItems() { return items; }
+
+    public void addItem(Item item) {
+        item.unlock(); // mark as unlocked when added to inventory
+        items.add(item);
+    }
+
     public void printInventory() {
         System.out.println("\n🎒 Inventory");
         System.out.println("💰 Coins: " + coins);
-        System.out.println("📦 Items: " + (items.isEmpty() ? "[Empty]" : items));
+        if (items.isEmpty()) {
+            System.out.println("📦 Items: [Empty]");
+        } else {
+            System.out.println("📦 Items:");
+            for (Item item : items) {
+                System.out.println(" - " + item);
+            }
+        }
     }
 
     public static void openInventory(UserProfile user) {
