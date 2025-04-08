@@ -76,10 +76,9 @@ public class SessionLogic {
 
         System.out.println("\n✅ Session complete! You finished " + completedCount + " out of 14 exercises.");
 
-        user.addCoins(completedCount);
+        user.getInventory().addCoins(completedCount);
         System.out.println("\n🏅 You earned " + completedCount + " coins this session!");
-        System.out.println("💰 Your total is now: " + user.getCoins() + " coins.");
-
+        System.out.println("💰 Total coins: " + user.getInventory().getCoins());
 
     }
 }

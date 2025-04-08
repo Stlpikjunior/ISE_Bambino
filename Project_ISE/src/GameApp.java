@@ -39,7 +39,7 @@ public class GameApp {
                         scanner.nextLine();
                         break;
                     case "2":
-                        InventoryManager.openInventory(user);
+                        Inventory.openInventory(user);
                         break;
                     case "3":
                         ShopManager.openShop(user, conn, scanner);
