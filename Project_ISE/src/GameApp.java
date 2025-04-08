@@ -4,19 +4,21 @@ import java.util.Scanner;
 
 public class GameApp {
 
-    private static int userID;
+    private static UserProfile user;
 
     public static void main(String[] args) {
         try (Connection conn = DatabaseConnector.connect();
              Scanner scanner = new Scanner(System.in)) {
 
-            // 🔐 User login
             System.out.print("Enter your name: ");
             String name = scanner.nextLine().trim();
             System.out.print("Enter your age: ");
-            int Age = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("👋 Hello, " + name + "!");
+            int age = scanner.nextInt();
+            scanner.nextLine(); // flush newline
+
+            user = UserManager.getOrCreateUser(name, age, conn);
+            System.out.println("👋 Hello, " + user.getName() + "!");
+
 
             boolean running = true;
             while (running) {
@@ -32,18 +34,18 @@ public class GameApp {
 
                 switch (choice) {
                     case "1":
-                        int sessionID = SessionManager.startNewSession(userID, conn);
-                        SessionLogic.runSession(conn, userID, sessionID, scanner);
+                        int sessionID = SessionManager.startNewSession(user.getUserID(), conn);
+                        SessionLogic.runSession(conn, user, sessionID, scanner);
                         scanner.nextLine();
                         break;
                     case "2":
-                        InventoryManager.openInventory(userID, conn);
+                        InventoryManager.openInventory(user);
                         break;
                     case "3":
-                        ShopManager.openShop(userID, conn, scanner);
+                        ShopManager.openShop(user, conn, scanner);
                         break;
                     case "4":
-                        CustomizationManager.openCharacterCustomization(userID, conn, scanner);
+                        CustomizationManager.openCharacterCustomization(user, conn, scanner);
                         break;
                     case "5":
                         running = false;

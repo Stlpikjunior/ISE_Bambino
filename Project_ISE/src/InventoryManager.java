@@ -1,8 +1,6 @@
-import java.sql.Connection;
-import java.util.Scanner;
-
 public class InventoryManager {
-    public static void openInventory(int userID, Connection conn) {
-        System.out.println("🎒 Inventory is empty (coming soon)!");
+    public static void openInventory(UserProfile user) {
+        System.out.println("🎒 Inventory");
+        System.out.println("💰 Coins: " + user.getCoins());
     }
 }
