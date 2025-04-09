@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Shop {
 
-    public void open(User user, Scanner scanner) {
+    public void open(User user, Scanner scanner, InventorySQL inventorySQL) {
         Inventory inventory = user.getInventory();
         Monsterdex monsterdex = inventory.getMonsterdex();
 //        Wardrobe wardrobe = inventory.getWardrobe();
@@ -18,7 +18,7 @@ public class Shop {
 
 
             int maxOption = monsterdex.getItems().size();
-            System.out.println((maxOption + 1) + ". Gamble (6 coins)");
+            System.out.println((maxOption + 1) + ". Gamble (35 coins)");
             System.out.println((maxOption + 2) + ". Exit");
 
             System.out.print("Choose an option: ");
@@ -38,10 +38,10 @@ public class Shop {
                 shopping = false;
                 System.out.println("👋 Exiting shop...");
             } else if (choice == maxOption + 1) {
-                gamble(inventory);
+                gamble(inventory, user, inventorySQL);
             } else if (choice >= 1 && choice <= maxOption) {
                 Monster selected = monsterdex.getItems().get(choice - 1);
-                buyMonster(selected, inventory);
+                buyMonster(selected, inventory, user, inventorySQL);
             } else {
                 System.out.println("❌ Invalid choice.");
             }
@@ -61,7 +61,7 @@ public class Shop {
         }
     }
 
-    private void buyMonster(Monster monster, Inventory inv) {
+    private void buyMonster(Monster monster, Inventory inv, User user, InventorySQL inventorySQL) {
         boolean alreadyOwned = inv.getItems().stream()
                 .anyMatch(item -> item.getName().equals(monster.getName()));
         if (alreadyOwned) {
@@ -75,13 +75,13 @@ public class Shop {
         }
 
         inv.spendCoins(monster.getPrice());
-        inv.addItem(monster);
+        inv.addItem(monster, user.getUserID(), inventorySQL);
         monster.unlock();
 
         System.out.println("✅ You bought " + monster.getName() + "! 🎉");
     }
 
-    private void gamble(Inventory inv) {
+    private void gamble(Inventory inv, User user, InventorySQL inventorySQL) {
         int gambleCost = 35;
 
         if (inv.getCoins() < gambleCost) {
@@ -101,7 +101,7 @@ public class Shop {
 
         Monster reward = locked.get(new Random().nextInt(locked.size()));
         inv.spendCoins(gambleCost);
-        inv.addItem(reward);
+        inv.addItem(reward, user.getUserID(), inventorySQL);
         reward.unlock();
 
         System.out.println("🎲 You gambled and won: " + reward.getName() + "!");

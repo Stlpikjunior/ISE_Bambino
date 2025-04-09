@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.List;
 
 public class GameApp {
 
@@ -19,6 +20,22 @@ public class GameApp {
             user = UserManager.getOrCreateUser(name, age, conn);
             System.out.println("👋 Hello, " + user.getName() + "!");
 
+            InventorySQL inventorySQL = new InventorySQL(conn);
+            List<String> savedItemNames = inventorySQL.loadUserItems(user.getUserID());
+
+            for (Monster m : user.getInventory().getMonsterdex().getItems()) {
+                if (savedItemNames.contains(m.getName())) {
+                    m.unlock();
+                    user.getInventory().addItem(m, user.getUserID(), inventorySQL);
+                }
+            }
+
+            for (Outfit o : user.getInventory().getWardrobe().getItems()) {
+                if (savedItemNames.contains(o.getName())) {
+                    o.unlock();
+                    user.getInventory().addItem(o, user.getUserID(), inventorySQL);
+                }
+            }
 
             boolean running = true;
             while (running) {
@@ -44,10 +61,10 @@ public class GameApp {
                         break;
                     case "3":
                         Shop shop = new Shop();
-                        shop.open(user, scanner);
+                        shop.open(user, scanner, inventorySQL);
                         break;
                     case "4":
-                        CustomizationManager.openCharacterCustomization(user, conn, scanner);
+                        Character.openCharacterCustomization(user, conn, scanner);
                         break;
                     case "5":
                         user.getInventory().getMonsterdex().displayCollection();

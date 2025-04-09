@@ -19,7 +19,7 @@ public class Inventory {
                 items.add(m);
             }
         }
-        // Add unlocked outfits
+
         for (Outfit o : wardrobe.getItems()) {
             if (!o.isLocked()) {
                 items.add(o);
@@ -42,10 +42,18 @@ public class Inventory {
     // Item methods
     public List<Item> getItems() { return items; }
 
-    public void addItem(Item item) {
-        item.unlock(); // mark as unlocked when added to inventory
+    public void addItem(Item item, int userID, InventorySQL dao) {
+        item.unlock();
         items.add(item);
+
+        String type = item instanceof Monster ? "Monster" : "Outfit";
+        try {
+            dao.saveItem(userID, item.getName(), type);
+        } catch (Exception e) {
+            System.out.println("❌ Failed to save item to database: " + e.getMessage());
+        }
     }
+
 
     public void printInventory() {
         System.out.println("\n🎒 Inventory");

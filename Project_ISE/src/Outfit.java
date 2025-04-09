@@ -11,6 +11,6 @@ public class Outfit extends Item {
 
     @Override
     public String toString() {
-        return "#" + id + " " + name + " - " + (isLocked ? "🔒 Locked" : "\uD83D\uDC32 Unlocked") + " | " + description;
+        return "#" + id + " " + name + " - " + (isLocked ? "🔒 Locked" : "\uD83E\uDDE5 Unlocked") + " | " + description;
     }
 }

@@ -1,14 +1,3 @@
-
-//import java.sql.Connection;
-//import java.util.Scanner;
-//
-//public class CustomizationManager {
-//    public static void openCharacterCustomization(User user, Connection conn, Scanner scanner) {
-//        System.out.println("🎨 Character customization coming soon!");
-//    }
-//}
-
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,30 +25,29 @@ public class Character {
     }
 
     /**
-     * Opens the character customization interface so the user can select
-     * an unlocked outfit (to wear) and a buddy (from unlocked monsters).
+     * Opens the character customization interface. This allows the user to choose:
+     * 1. An unlocked outfit (to "wear") from the Wardrobe.
+     * 2. A buddy from unlocked monsters in the Monsterdex.
      *
-     * @param user The current user profile.
-     * @param conn The database connection (reserved for future use).
+     * @param user The current User instance.
+     * @param conn The database connection (reserved for future integration).
      * @param scanner The Scanner for user input.
-     * @return A Character instance with the chosen outfit and buddy.
+     * @return A Character instance with the selected outfit and buddy.
      */
-    public static Character openCharacterCustomization(UserProfile user, Connection conn, Scanner scanner) {
-        System.out.println("🎨 Welcome to Character Customization!");
+    public static Character openCharacterCustomization(User user, Connection conn, Scanner scanner) {
+        System.out.println("🎨 Welcome to Character Customization, " + user.getName() + "!");
 
         // Retrieve unlocked outfits from the Wardrobe.
-        // (Wardrobe is similar in structure to Monsterdex.)
-        Wardrobe wardrobe = new Wardrobe();
+        Wardrobe wardrobe = new Wardrobe();  // Assuming Wardrobe is implemented similarly to Monsterdex.
         List<Outfit> unlockedOutfits = new ArrayList<>();
-        for (Outfit outfit : wardrobe.getOutfits()) {
+        for (Outfit outfit : wardrobe.getItems()) {
             if (!outfit.isLocked()) {
                 unlockedOutfits.add(outfit);
             }
         }
-        // Ensure at least one outfit is available.
         if (unlockedOutfits.isEmpty()) {
             System.out.println("No unlocked outfits found. Defaulting to the first outfit in the wardrobe.");
-            unlockedOutfits.add(wardrobe.getOutfits().get(0));
+            unlockedOutfits.add(wardrobe.getItems().get(0));
         }
         System.out.println("\nChoose an outfit to wear:");
         for (int i = 0; i < unlockedOutfits.size(); i++) {
@@ -67,20 +55,19 @@ public class Character {
         }
         System.out.print("Enter the number of your chosen outfit: ");
         int outfitChoice = scanner.nextInt();
-        scanner.nextLine(); // consume the newline
+        scanner.nextLine(); // consume newline
 
-        // Retrieve unlocked monsters from Monsterdex.
+        // Retrieve unlocked monsters (buddies) from Monsterdex.
         Monsterdex monsterdex = new Monsterdex();
         List<Monster> unlockedMonsters = new ArrayList<>();
-        for (Monster monster : monsterdex.getMonsters()) {
+        for (Monster monster : monsterdex.getItems()) {
             if (!monster.isLocked()) {
                 unlockedMonsters.add(monster);
             }
         }
-        // Ensure at least one monster is available.
         if (unlockedMonsters.isEmpty()) {
             System.out.println("No unlocked monsters found. Defaulting to the first monster.");
-            unlockedMonsters.add(monsterdex.getMonsters().get(0));
+            unlockedMonsters.add(monsterdex.getItems().get(0));
         }
         System.out.println("\nChoose a buddy from your unlocked monsters:");
         for (int i = 0; i < unlockedMonsters.size(); i++) {
@@ -88,9 +75,9 @@ public class Character {
         }
         System.out.print("Enter the number of your chosen buddy: ");
         int buddyChoice = scanner.nextInt();
-        scanner.nextLine(); // consume the newline
+        scanner.nextLine(); // consume newline
 
-        // Create the Character with the selected options.
+        // Create a Character instance and assign the selected outfit and buddy.
         Character character = new Character();
         character.setCurrentOutfit(unlockedOutfits.get(outfitChoice - 1));
         character.setCurrentBuddy(unlockedMonsters.get(buddyChoice - 1));
@@ -101,6 +88,4 @@ public class Character {
 
         return character;
     }
-
-    // Additional character customization methods can be added here later.
 }
