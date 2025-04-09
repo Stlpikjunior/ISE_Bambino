@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class SessionLogic {
 
-    public static void runSession(Connection conn, UserProfile user, int sessionID, Scanner scanner) throws SQLException {
+    public static void runSession(Connection conn, User user, int sessionID, Scanner scanner) throws SQLException {
         System.out.println("🎮 Starting exercise session...");
 
         // Prepare SQL statements

@@ -1,10 +1,10 @@
-public class UserProfile {
+public class User {
     private final int userID;
     private final String name;
     private final int age;
     private final Inventory inventory;
 
-    public UserProfile(int userID, String name, int age) {
+    public User(int userID, String name, int age) {
         this.userID = userID;
         this.name = name;
         this.age = age;

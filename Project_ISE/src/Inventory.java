@@ -48,7 +48,7 @@ public class Inventory {
         }
     }
 
-    public static void openInventory(UserProfile user) {
+    public static void openInventory(User user) {
         user.getInventory().printInventory();
     }
 }

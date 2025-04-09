@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameApp {
 
-    private static UserProfile user;
+    private static User user;
 
     public static void main(String[] args) {
         try (Connection conn = DatabaseConnector.connect();

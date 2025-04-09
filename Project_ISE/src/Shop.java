@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Shop {
 
-    public void open(UserProfile user, Scanner scanner) {
+    public void open(User user, Scanner scanner) {
         Inventory inventory = user.getInventory();
         Monsterdex monsterdex = inventory.getMonsterdex();
         boolean shopping = true;
@@ -78,7 +78,7 @@ public class Shop {
     }
 
     private void gamble(Inventory inv) {
-        int gambleCost = 6;
+        int gambleCost = 35;
 
         if (inv.getCoins() < gambleCost) {
             System.out.println("❌ Not enough coins to gamble.");

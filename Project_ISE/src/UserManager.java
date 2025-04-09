@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class UserManager {
 
-    public static UserProfile getOrCreateUser(String name, int age, Connection conn) throws SQLException {
+    public static User getOrCreateUser(String name, int age, Connection conn) throws SQLException {
         String selectSQL = "SELECT UserID FROM User WHERE Name = ?";
         String insertSQL = "INSERT INTO User (Name, Age) VALUES (?, ?)";
 
@@ -12,7 +12,7 @@ public class UserManager {
 
             if (rs.next()) {
                 int userID = rs.getInt("UserID");
-                return new UserProfile(userID, name, age);
+                return new User(userID, name, age);
             } else {
                 try (PreparedStatement insertStmt = conn.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS)) {
                     insertStmt.setString(1, name);
@@ -22,7 +22,7 @@ public class UserManager {
                     ResultSet generatedKeys = insertStmt.getGeneratedKeys();
                     if (generatedKeys.next()) {
                         int userID = generatedKeys.getInt(1);
-                        return new UserProfile(userID, name, age);
+                        return new User(userID, name, age);
                     } else {
                         throw new SQLException("Failed to create user.");
                     }
