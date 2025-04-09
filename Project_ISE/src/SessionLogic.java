@@ -7,7 +7,7 @@ public class SessionLogic {
         System.out.println("🎮 Starting exercise session...");
 
         // Prepare SQL statements
-        PreparedStatement selectExercises = conn.prepareStatement("SELECT ExerciseID, Name FROM Exercise");
+        PreparedStatement selectExercises = conn.prepareStatement("SELECT ExerciseID, Name, Description FROM Exercise");
         ResultSet rs = selectExercises.executeQuery();
 
         PreparedStatement insertSessionExercise = conn.prepareStatement(
@@ -18,9 +18,12 @@ public class SessionLogic {
         while (rs.next()) {
             int exerciseID = rs.getInt("ExerciseID");
             String exerciseName = rs.getString("Name");
+            String exerciseDescription = rs.getString("Description");
 
+            System.out.println("\n=====================================");
             System.out.println("\n➡️ Exercise: " + exerciseName);
-            System.out.print("Did you complete it? (1 = yes, 0 = no, type 'skip' to skip this one, or 'end' to finish early): ");
+            System.out.println("\n➡️ Description: " + exerciseDescription);
+            System.out.println("\nDid you complete it? (1 = yes, 0 = no, type 'skip' to skip this one, or 'end' to finish early): ");
             String input = scanner.next();
 
             if (input.equalsIgnoreCase("end")) {
