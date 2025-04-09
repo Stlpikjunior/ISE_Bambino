@@ -7,19 +7,23 @@ public class Shop {
     public void open(User user, Scanner scanner) {
         Inventory inventory = user.getInventory();
         Monsterdex monsterdex = inventory.getMonsterdex();
+//        Wardrobe wardrobe = inventory.getWardrobe();
         boolean shopping = true;
 
         while (shopping) {
             System.out.println("\n🛒 Welcome to the Monster Shop!");
             System.out.println("💰 Coins: " + inventory.getCoins());
             displayAvailableMonsters(monsterdex, inventory);
+//            displayAvailableOutfits(wardrobe, inventory);
 
-            int maxOption = monsterdex.getMonsters().size();
+
+            int maxOption = monsterdex.getItems().size();
             System.out.println((maxOption + 1) + ". Gamble (6 coins)");
             System.out.println((maxOption + 2) + ". Exit");
 
             System.out.print("Choose an option: ");
             int choice;
+
 
             try {
                 choice = scanner.nextInt();
@@ -36,7 +40,7 @@ public class Shop {
             } else if (choice == maxOption + 1) {
                 gamble(inventory);
             } else if (choice >= 1 && choice <= maxOption) {
-                Monster selected = monsterdex.getMonsters().get(choice - 1);
+                Monster selected = monsterdex.getItems().get(choice - 1);
                 buyMonster(selected, inventory);
             } else {
                 System.out.println("❌ Invalid choice.");
@@ -45,7 +49,7 @@ public class Shop {
     }
 
     private void displayAvailableMonsters(Monsterdex dex, Inventory inv) {
-        List<Monster> monsters = dex.getMonsters();
+        List<Monster> monsters = dex.getItems();
         System.out.println("Available Monsters:");
         for (int i = 0; i < monsters.size(); i++) {
             Monster m = monsters.get(i);
@@ -85,7 +89,7 @@ public class Shop {
             return;
         }
 
-        List<Monster> locked = inv.getMonsterdex().getMonsters().stream()
+        List<Monster> locked = inv.getMonsterdex().getItems().stream()
                 .filter(m -> inv.getItems().stream()
                         .noneMatch(item -> item.getName().equals(m.getName())))
                 .toList();

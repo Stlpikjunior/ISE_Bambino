@@ -5,15 +5,24 @@ public class Inventory {
     private int coins;
     private final List<Item> items;
     private final Monsterdex monsterdex;
+    private final Wardrobe wardrobe;
 
     public Inventory() {
         this.coins = 0;
         this.items = new ArrayList<>();
         this.monsterdex = new Monsterdex();
+        this.wardrobe = new Wardrobe();
 
-        for (Monster m: monsterdex.getMonsters()) {
+
+        for (Monster m: monsterdex.getItems()) {
             if (!m.isLocked()) {
                 items.add(m);
+            }
+        }
+        // Add unlocked outfits
+        for (Outfit o : wardrobe.getItems()) {
+            if (!o.isLocked()) {
+                items.add(o);
             }
         }
     }
@@ -25,6 +34,9 @@ public class Inventory {
 
     public Monsterdex getMonsterdex() {
         return monsterdex;
+    }
+    public Wardrobe getWardrobe() {
+        return wardrobe;
     }
 
     // Item methods

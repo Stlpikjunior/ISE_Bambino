@@ -50,7 +50,7 @@ public class GameApp {
                         CustomizationManager.openCharacterCustomization(user, conn, scanner);
                         break;
                     case "5":
-                        user.getInventory().getMonsterdex().displayMonsterdex();
+                        user.getInventory().getMonsterdex().displayCollection();
                         break;
                     case "6":
                         running = false;
