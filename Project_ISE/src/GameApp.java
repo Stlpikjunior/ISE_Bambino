@@ -43,7 +43,8 @@ public class GameApp {
                         Inventory.openInventory(user);
                         break;
                     case "3":
-                        ShopManager.openShop(user, conn, scanner);
+                        Shop shop = new Shop();
+                        shop.open(user, scanner);
                         break;
                     case "4":
                         CustomizationManager.openCharacterCustomization(user, conn, scanner);

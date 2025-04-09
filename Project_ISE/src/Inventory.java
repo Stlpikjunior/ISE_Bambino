@@ -10,6 +10,12 @@ public class Inventory {
         this.coins = 0;
         this.items = new ArrayList<>();
         this.monsterdex = new Monsterdex();
+
+        for (Monster m: monsterdex.getMonsters()) {
+            if (!m.isLocked()) {
+                items.add(m);
+            }
+        }
     }
 
     // Coin methods

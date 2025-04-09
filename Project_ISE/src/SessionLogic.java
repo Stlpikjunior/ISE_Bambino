@@ -45,7 +45,7 @@ public class SessionLogic {
                 }
             }
 
-            System.out.print("How do you rate it (1–5): ");
+            System.out.print("How tough was the exercise? (1–5): ");
             int feedback = 3;
             try {
                 feedback = scanner.nextInt();
