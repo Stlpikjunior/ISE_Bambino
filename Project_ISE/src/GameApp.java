@@ -6,6 +6,7 @@ import java.util.List;
 public class GameApp {
 
     private static User user;
+    private static Character character;
 
     public static void main(String[] args) {
         try (Connection conn = DatabaseConnector.connect();
@@ -38,14 +39,13 @@ public class GameApp {
                 }
             }
 
-            for (Monster m : user.getInventory().getMonsterdex().getItems()) {
-                if (!m.isLocked() && !savedItemNames.contains(m.getName())) {
-                    // Default unlocked monster that wasn't in DB — save it
-                    inventorySQL.saveItem(user.getUserID(), m.getName(), "Monster");
-                    user.getInventory().addItem(m, user.getUserID(), inventorySQL); // optional: also add if not already
-                } else if (savedItemNames.contains(m.getName())) {
-                    m.unlock();
-                    user.getInventory().addItem(m, user.getUserID(), inventorySQL);
+            for (Outfit o : user.getInventory().getWardrobe().getItems()) {
+                if (!o.isLocked() && !savedItemNames.contains(o.getName())) {
+                    inventorySQL.saveItem(user.getUserID(), o.getName(), "Outfit");
+                    user.getInventory().addItem(o, user.getUserID(), inventorySQL);
+                } else if (savedItemNames.contains(o.getName())) {
+                    o.unlock();
+                    user.getInventory().addItem(o, user.getUserID(), inventorySQL);
                 }
             }
 
@@ -76,7 +76,11 @@ public class GameApp {
                         shop.open(user, scanner, inventorySQL, coinSQL);
                         break;
                     case "4":
-                        Character.openCharacterCustomization(user, conn, scanner);
+//                        Character.openCharacterCustomization(user, conn, scanner);
+                        if (character == null) {
+                            character = new Character();
+                        }
+                        Character.openCharacterCustomization(user, scanner, character);
                         break;
                     case "5":
                         user.getInventory().getMonsterdex().displayCollection();

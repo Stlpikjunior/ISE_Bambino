@@ -13,18 +13,6 @@ public class Inventory {
         this.monsterdex = new Monsterdex();
         this.wardrobe = new Wardrobe();
 
-
-        for (Monster m: monsterdex.getItems()) {
-            if (!m.isLocked()) {
-                items.add(m);
-            }
-        }
-
-        for (Outfit o : wardrobe.getItems()) {
-            if (!o.isLocked()) {
-                items.add(o);
-            }
-        }
     }
 
     // Coin methods
@@ -61,6 +49,7 @@ public class Inventory {
         } catch (Exception e) {
             System.out.println("❌ Failed to save item to database: " + e.getMessage());
         }
+
     }
 
 
