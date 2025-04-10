@@ -29,8 +29,17 @@ public class Inventory {
 
     // Coin methods
     public int getCoins() { return coins; }
-    public void addCoins(int amount) { this.coins += amount; }
-    public void spendCoins(int amount) { this.coins -= amount; }
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+    public void addCoins(int amount, int userID, CoinSQL coinSQL) {
+        this.coins += amount;
+        coinSQL.saveCoins(userID, this.coins);
+    }
+    public void spendCoins(int amount, int userID, CoinSQL coinSQL) {
+        this.coins -= amount;
+        coinSQL.saveCoins(userID, this.coins);
+    }
 
     public Monsterdex getMonsterdex() {
         return monsterdex;

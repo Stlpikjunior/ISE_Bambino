@@ -20,6 +20,10 @@ public class GameApp {
             user = UserManager.getOrCreateUser(name, age, conn);
             System.out.println("👋 Hello, " + user.getName() + "!");
 
+            CoinSQL coinSQL = new CoinSQL(conn);
+            int coins = coinSQL.loadCoins(user.getUserID());
+            user.getInventory().setCoins(coins);
+
             InventorySQL inventorySQL = new InventorySQL(conn);
             List<String> savedItemNames = inventorySQL.loadUserItems(user.getUserID());
 
@@ -61,7 +65,7 @@ public class GameApp {
                         break;
                     case "3":
                         Shop shop = new Shop();
-                        shop.open(user, scanner, inventorySQL);
+                        shop.open(user, scanner, inventorySQL, coinSQL);
                         break;
                     case "4":
                         Character.openCharacterCustomization(user, conn, scanner);
