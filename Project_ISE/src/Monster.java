@@ -11,7 +11,7 @@ public class Monster extends Item {
 
     @Override
     public String toString() {
-        return "#" + id + " " + name + " - " + (isLocked ? "🔒 Locked" : "\uD83D\uDC32 Unlocked") + " | " + description;
+        return "#" + id + " " + name + " - " + (isLocked ? "🔒 Locked" : "🐲 Unlocked") + " | " + description;
     }
 }
 

@@ -11,7 +11,7 @@ public class Shop {
         boolean shopping = true;
 
         while (shopping) {
-            System.out.println("\n🛒 Welcome to the Monster Shop!");
+            System.out.println("\n🛒 Welcome to the Item Shop!");
             System.out.println("💰 Coins: " + inventory.getCoins());
             displayAvailableMonsters(monsterdex, inventory);
 //            displayAvailableOutfits(wardrobe, inventory);

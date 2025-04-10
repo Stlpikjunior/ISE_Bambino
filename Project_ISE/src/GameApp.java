@@ -57,7 +57,8 @@ public class GameApp {
                 System.out.println("3. Open Shop");
                 System.out.println("4. Character Customization");
                 System.out.println("5. View Monsterdex");
-                System.out.println("6. Exit");
+                System.out.println("6. View Wardrobe");
+                System.out.println("7. Exit");
                 System.out.print("Enter your choice: ");
 
                 String choice = scanner.nextLine().trim();
@@ -76,7 +77,6 @@ public class GameApp {
                         shop.open(user, scanner, inventorySQL, coinSQL);
                         break;
                     case "4":
-//                        Character.openCharacterCustomization(user, conn, scanner);
                         if (character == null) {
                             character = new Character();
                         }
@@ -86,6 +86,9 @@ public class GameApp {
                         user.getInventory().getMonsterdex().displayCollection();
                         break;
                     case "6":
+                        user.getInventory().getWardrobe().displayCollection();
+                        break;
+                    case "7":
                         running = false;
                         System.out.println("👋 Goodbye!");
                         break;
@@ -94,7 +97,6 @@ public class GameApp {
                         break;
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -11,6 +11,6 @@ public class Wardrobe extends ItemCollection<Outfit> {
         items.add(new Outfit(6, "Silver🪙", "Sleek and sophisticated with a shimmering metallic touch.", 40, false));
         items.add(new Outfit(7, "Gold👑", "Luxurious and radiant, fit for royalty.", 45, false));
         items.add(new Outfit(9, "Diamond💎", "Sparkling and exclusive, the pinnacle of style.", 50, false));
-        items.add(new Outfit(10, "Danny DeVito🤴🏼", "The legendary and rare skin. Enough said.", 99, false));
+        items.add(new Outfit(10, "Danny DeVito👘", "The legendary and rare skin. Enough said.", 200, false));
     }
 }

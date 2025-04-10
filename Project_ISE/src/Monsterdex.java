@@ -11,7 +11,7 @@ public class Monsterdex extends ItemCollection<Monster> {
         items.add(new Monster(7, "Shadow🥷", "A mysterious figure from the dark.", 40, false));
         items.add(new Monster(8, "Glitter💫", "Shimmering with magical light.", 45, false));
         items.add(new Monster(9, "Mighty🔥", "A strong and valorous guardian.", 50, false));
-        items.add(new Monster(10, "Danny DeVito🤴🏼", "The legendary and expensive monster skin.", 99, false));
+        items.add(new Monster(10, "Danny DeVito🤴🏼", "The legendary and rare monster.", 300, false));
     }
 }
 
