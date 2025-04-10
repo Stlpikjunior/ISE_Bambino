@@ -12,7 +12,7 @@ public class GameApp {
         try (Connection conn = DatabaseConnector.connect();
              Scanner scanner = new Scanner(System.in)) {
 
-            System.out.print("Enter your name: ");
+            System.out.print("Enter your (User)name: ");
             String name = scanner.nextLine().trim();
             System.out.print("Enter your age: ");
             int age = scanner.nextInt();
