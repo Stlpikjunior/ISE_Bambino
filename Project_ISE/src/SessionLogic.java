@@ -76,7 +76,7 @@ public class SessionLogic {
         updateScore.setInt(1, completedCount);
         updateScore.setInt(2, sessionID);
         updateScore.executeUpdate();
-     
+
         System.out.println("\n✅ Session complete! You finished " + completedCount + " out of 14 exercises.");
 
         user.getInventory().addCoins(completedCount, user.getUserID(), coinSQL);
