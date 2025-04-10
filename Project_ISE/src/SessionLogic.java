@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class SessionLogic {
 
-    public static void runSession(Connection conn, User user, int sessionID, Scanner scanner) throws SQLException {
+    public static void runSession(Connection conn, User user, int sessionID, Scanner scanner, CoinSQL coinSQL) throws SQLException {
         System.out.println("🎮 Starting exercise session...");
 
         // Prepare SQL statements
@@ -76,12 +76,11 @@ public class SessionLogic {
         updateScore.setInt(1, completedCount);
         updateScore.setInt(2, sessionID);
         updateScore.executeUpdate();
-
+     
         System.out.println("\n✅ Session complete! You finished " + completedCount + " out of 14 exercises.");
 
-        user.getInventory().addCoins(completedCount);
+        user.getInventory().addCoins(completedCount, user.getUserID(), coinSQL);
         System.out.println("\n🏅 You earned " + completedCount + " coins this session!");
         System.out.println("💰 Total coins: " + user.getInventory().getCoins());
-
     }
 }

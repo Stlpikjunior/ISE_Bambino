@@ -57,7 +57,7 @@ public class GameApp {
                 switch (choice) {
                     case "1":
                         int sessionID = SessionManager.startNewSession(user.getUserID(), conn);
-                        SessionLogic.runSession(conn, user, sessionID, scanner);
+                        SessionLogic.runSession(conn, user, sessionID, scanner, coinSQL);
                         scanner.nextLine();
                         break;
                     case "2":
