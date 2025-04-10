@@ -60,6 +60,8 @@ public class Shop {
                 System.out.println((i + 1) + ". " + m.getName() + " - " + m.getPrice() + " coins (" + m.getDescription() + ")");
             }
         }
+
+        System.out.println("-------------------------------");
     }
 
     private void displayAvailableOutfits(Wardrobe wardrobe, Inventory inv) {
@@ -127,6 +129,7 @@ public class Shop {
                 .filter(m -> inv.getItems().stream()
                         .noneMatch(item -> item.getName().equals(m.getName())))
                 .toList();
+
 
         List<Outfit> lockedOutfits = inv.getWardrobe().getItems().stream()
                 .filter(o -> inv.getItems().stream()
