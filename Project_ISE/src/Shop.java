@@ -17,7 +17,7 @@ public class Shop {
             displayAvailableOutfits(wardrobe, inventory);
 
             int maxOption = monsterdex.getItems().size() + wardrobe.getItems().size();
-            System.out.println((maxOption + 1) + ". Gamble (35 coins)");
+            System.out.println((maxOption + 1) + ". Chest (35 coins)");
             System.out.println((maxOption + 2) + ". Exit");
 
             System.out.print("Choose an option: ");

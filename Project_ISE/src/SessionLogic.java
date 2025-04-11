@@ -48,18 +48,25 @@ public class SessionLogic {
                 }
             }
 
-            System.out.print("How tough was the exercise? (1–5): ");
-            int feedback = 3;
-            try {
-                feedback = scanner.nextInt();
-                while (feedback < 1 || feedback > 5) {
-                    System.out.print("Invalid. Please enter a number between 1 and 5: ");
+            int feedback = -1; // Use -1 for skipped exercises
+
+            if (!input.equalsIgnoreCase("skip")) {
+                System.out.print("How tough was the exercise? (1–5): ");
+                try {
                     feedback = scanner.nextInt();
+                    while (feedback < 1 || feedback > 5) {
+                        System.out.print("Invalid. Please enter a number between 1 and 5: ");
+                        feedback = scanner.nextInt();
+                    }
+                } catch (Exception e) {
+                    System.out.println("❌ Invalid input. Using default rating 3.");
+                    feedback = 3;
+                    scanner.nextLine(); // Clear buffer
                 }
-            } catch (Exception e) {
-                System.out.println("❌ Invalid input. Using default rating 3.");
-                scanner.nextLine(); // Clear buffer
+            } else {
+                feedback = -1; // Or any other default for "skipped"
             }
+
 
             if (completed == 1) completedCount++;
 
