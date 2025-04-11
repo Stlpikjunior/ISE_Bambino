@@ -1,4 +1,4 @@
-# 🧠 JDM Exercise Game – *MyoMove*
+# 🧠 JDM Exercise Game – *The Journey of JDM*
 
 A Java-based, gamified command-line prototype that supports children with Juvenile Dermatomyositis (JDM) in performing and tracking their CMAS exercises. The system rewards participation with virtual items and stores all progress in a local SQLite database. Developed as part of the *Introduction to Software Engineering* course at Zuyd University.
 
